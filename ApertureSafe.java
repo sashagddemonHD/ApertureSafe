@@ -44,9 +44,9 @@ public class ApertureSafe extends JFrame {
     private void loadData() {
         File f = new File(FILE_NAME); if (!f.exists()) return;
         try {
-            byte[][] data = new byte[1][(int) f.length()];
-            try (FileInputStream fis = new FileInputStream(f)) { fis.read(data[0]); }
-            String res = new String(crypt(data[0]), StandardCharsets.UTF_8);
+            byte[] data = new byte[(int) f.length()]; // ИСПРАВЛЕНО НА ОДНОМЕРНЫЙ МАССИВ
+            try (FileInputStream fis = new FileInputStream(f)) { fis.read(data); }
+            String res = new String(crypt(data), StandardCharsets.UTF_8);
             for (String line : res.split("\n")) {
                 String[] parts = line.split("\\|\\|\\|"); if (parts.length == 3) model.addRow(parts);
             }
